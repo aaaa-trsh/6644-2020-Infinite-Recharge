@@ -34,7 +34,7 @@ public class DriveTrain extends SubsystemBase
   public Ultrasonic ultrasonic = new Ultrasonic(4, 5);
 
   public static boolean canUseJoystick = true;
-
+  public double forwardRotation;
   public DriveTrain()
   {    
     leftEncoder.setDistancePerPulse(Constants.DriveConstants.encoderDistancePerPulse);

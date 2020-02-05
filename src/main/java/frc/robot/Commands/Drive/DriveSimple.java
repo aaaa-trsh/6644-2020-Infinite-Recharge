@@ -1,15 +1,9 @@
-/*----------------------------------------------------------------------------*/
-/* Drive forward for a specific distance with gyro correction.                */
-/* : add path correction to DriveForward.java                             */
-/*----------------------------------------------------------------------------*/
-
-package frc.robot.Commands;
+package frc.robot.Commands.Drive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.Subsystems.DriveTrain;
 
 public class DriveSimple extends CommandBase
 {

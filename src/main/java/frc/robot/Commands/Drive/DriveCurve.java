@@ -1,9 +1,4 @@
-/*----------------------------------------------------------------------------*/
-/* Drive forward for a specific distance with gyro correction.                */
-/* : add path correction to DriveForward.java                             */
-/*----------------------------------------------------------------------------*/
-
-package frc.robot.Commands;
+package frc.robot.Commands.Drive;
 
 import java.awt.geom.Point2D;
 

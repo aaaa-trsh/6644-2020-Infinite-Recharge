@@ -4,6 +4,16 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 
 public final class Constants 
 {
+    public static final class ShooterConstants
+    {
+        // Shooter Ports
+        public static final int flywheel1Port = 4;
+        public static final int flywheel2Port = 5;
+
+        public static final int pivotPort = 6;
+        public static final int[] pivotEncoderPorts = new int[]{6, 7};
+    }
+
     public static final class DriveConstants 
     {
         //Drive Values
@@ -51,5 +61,11 @@ public final class Constants
         public static final double ramseteZeta = .7;//0.7
 
         public static final double pDriveVel = 2.5;
+    }
+
+    public static final class PneumaticsConstants
+    {
+        public static final int driveSolenoidPort = 0;
+        public static final int intakeSolenoidPort = 1;
     }
 }

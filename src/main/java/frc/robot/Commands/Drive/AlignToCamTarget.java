@@ -1,8 +1,7 @@
-package frc.robot.Commands;
+package frc.robot.Commands.Drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.Subsystems.DriveTrain;
 
 public class AlignToCamTarget extends CommandBase
 {
@@ -32,7 +31,7 @@ public class AlignToCamTarget extends CommandBase
     double turningValue = x == 160 ? 0 : (0 - x) * 0.006f;
     Robot.drivetrain.arcadeDrive(0, turningValue);
     System.out.println(turningValue);
-    //DriveTrain.forwardRotation = Robot.drivetrain.gyro.getAngle();
+    Robot.drivetrain.forwardRotation = Robot.drivetrain.gyro.getAngle();
   }
 
   @Override

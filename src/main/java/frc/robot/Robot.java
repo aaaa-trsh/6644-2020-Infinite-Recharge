@@ -20,12 +20,15 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Commands.*;
+import frc.robot.Commands.Drive.*;
 import frc.robot.Classes.*;
 import frc.robot.Subsystems.*;
 
@@ -36,6 +39,7 @@ public class Robot extends TimedRobot
 
   // SUBSYSTEMS
   public static DriveTrain drivetrain = new DriveTrain();
+  public static Shooter shooter = new Shooter();
 
   // ROBOT MAP
   public RobotMap robotMap = new RobotMap();
@@ -48,6 +52,9 @@ public class Robot extends TimedRobot
   SerialPort visionPort = null;
   int loopCount = 0;
 
+  public static NetworkTableEntry yawX;
+  public static NetworkTableEntry pitchY;
+
   @Override
   public void robotInit() 
   {
@@ -56,12 +63,9 @@ public class Robot extends TimedRobot
     drivetrain.start();
 
     drivetrain.setDefaultCommand(new GyroArcadeDrive());
-    // Start up gyro
-
-    // Set drive dead zone so it doesn't instantly respond to joystick movement
 
     // Start the compressor - important for anything related to pneumatics
-    //RobotMap.compressor.start();
+    RobotMap.compressor.start();
 
     // Try connecting to JeVois
     try {
@@ -74,6 +78,11 @@ public class Robot extends TimedRobot
     }
 
     CameraServer.getInstance().startAutomaticCapture();
+
+    NetworkTableInstance table = NetworkTableInstance.getDefault();
+    NetworkTable myCam = table.getTable("chameleon-vision").getSubTable("MyCamName");
+    yawX = myCam.getEntry("yaw");
+    pitchY = myCam.getEntry("yaw");
   }
 
   void logShuffleboard() 
@@ -100,18 +109,7 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousInit() 
   {
-    /*
-    if (autonomousCommand != null) {
-      autonomousCommand.schedule();
-    }*/
     robotMap.getAutonomousCommand().schedule();
-    //autonomousCommand.schedule();
-  }
-
-  @Override
-  public void autonomousPeriodic() 
-  {
-    // This basically tells the robot to run any commands
   }
 
   public static boolean canDrive = true;
@@ -144,11 +142,8 @@ public class Robot extends TimedRobot
       serX = SerialDecoder.DecodeSerial('x', visionInput);
       serY = SerialDecoder.DecodeSerial('y', visionInput);
     }
-
-    // Debug for getting data
-    //System.out.println((serX != -1 ? "x -> " + serX : "") + (serY != -1 ? " y -> " + serY : ""));
-    //System.out.println(visionPort.getBytesReceived() != 0 ?"rcv'd: " + visionPort.readString(): "no data");
   }
+
   // Makes robot not drive away when there is no joystick input
   public double handleDeadband(double val, double deadband) 
   {
