@@ -7,19 +7,19 @@
 
 package frc.robot.Commands.Shooter;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.Constants.ShooterConstants;
 
-public class SetIntake extends InstantCommand {
-  public boolean intakeOn;
-  public SetIntake(boolean on) {
+public class WaitUntilFlywheelSpeed extends CommandBase {
+
+  public WaitUntilFlywheelSpeed() 
+  {
     addRequirements(Robot.shooter);
-    intakeOn = on;
   }
 
   @Override
-  public void initialize() 
-  {
-    Robot.shooter.SetIntake(intakeOn);
+  public boolean isFinished() {
+    return !Robot.shooter.isShooting || (Robot.shooter.flywheelLEncoder.getRate() > ShooterConstants.minFlywheelSpeed && Robot.shooter.flywheelREncoder.getRate() > ShooterConstants.minFlywheelSpeed);
   }
 }

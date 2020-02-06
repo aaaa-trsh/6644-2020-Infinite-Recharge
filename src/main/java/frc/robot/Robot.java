@@ -46,7 +46,7 @@ public class Robot extends TimedRobot
 
   // CAMERA / SERIAL COMMS
   public static int xCamOffset, yCamOffset, serX, serY;
-
+  public static boolean hasVisionTarget;
   static final int BAUD_RATE = 115200;
 
   SerialPort visionPort = null;
@@ -102,6 +102,8 @@ public class Robot extends TimedRobot
     logShuffleboard();
     CommandScheduler.getInstance().run();
     // Calculate the offset based off of the camera size: 320px by 240px
+    // TODO: Use chameleon and set it to have a vision target.
+    hasVisionTarget = false;
     xCamOffset = serX != -1 ? serX - 160 : 160;
     yCamOffset = serY != -1 ? serY - 120 : 120;
   }
@@ -153,11 +155,5 @@ public class Robot extends TimedRobot
   public static boolean cancel() 
   {
     return RobotMap.cancelButton.get();
-  }
-  
-  @Override
-  public void disabledInit() 
-  {
-    
   }
 }

@@ -9,17 +9,19 @@ package frc.robot.Commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
+import frc.robot.Subsystems.ShooterPosition;
 
-public class SetIntake extends InstantCommand {
-  public boolean intakeOn;
-  public SetIntake(boolean on) {
+public class SetShooterPosition extends InstantCommand {
+
+  public SetShooterPosition(double position) 
+  {
     addRequirements(Robot.shooter);
-    intakeOn = on;
+    Robot.shooter.SetShooterPositionState(position);
   }
 
-  @Override
-  public void initialize() 
+  public SetShooterPosition(ShooterPosition position) 
   {
-    Robot.shooter.SetIntake(intakeOn);
+    addRequirements(Robot.shooter);
+    Robot.shooter.SetShooterPositionState(position);
   }
 }

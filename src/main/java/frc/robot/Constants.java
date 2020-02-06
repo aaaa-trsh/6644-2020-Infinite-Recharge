@@ -7,11 +7,31 @@ public final class Constants
     public static final class ShooterConstants
     {
         // Shooter Ports
-        public static final int flywheel1Port = 4;
-        public static final int flywheel2Port = 5;
+        public static final int flywheelPortL = 4;
+        public static final int flywheelPortR = 5;
 
-        public static final int pivotPort = 6;
+        public static final int feedPortL = 6;
+        public static final int feedPortR = 7;        
+
+        public static final int pivotPort = 8;
+        
+        public static final int[] magazineUltrasonicPorts = new int[]{4, 5};
+
         public static final int[] pivotEncoderPorts = new int[]{6, 7};
+        public static final int[] flywheelEncoderL = new int[]{8, 9};
+        public static final int[] flywheelEncoderR = new int[]{10, 11};
+
+        public static final int pivotDistancePerPulse = 4096;
+        
+        // PID Values
+        public static final double pivotP = 1;
+        public static final double pivotI = 0;
+        public static final double pivotD = 0;
+        public static final double pivotTurnTolerance = 3;
+        public static final double pivotTurnRateToleranceDegPerS = 3;
+
+        // Misc
+        public static final double minFlywheelSpeed = 11000;
     }
 
     public static final class DriveConstants 

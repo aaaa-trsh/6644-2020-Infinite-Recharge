@@ -31,7 +31,6 @@ public class DriveTrain extends SubsystemBase
   private DifferentialDriveOdometry odometry;
 
   public ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
-  public Ultrasonic ultrasonic = new Ultrasonic(4, 5);
 
   public static boolean canUseJoystick = true;
   public double forwardRotation;
@@ -58,8 +57,6 @@ public class DriveTrain extends SubsystemBase
     rightEncoder.setReverseDirection(Constants.DriveConstants.rightEncoderReversed);
 
     // Initialize Ultrasonic
-    ultrasonic.setEnabled(true);
-    ultrasonic.setAutomaticMode(true);
   }
   public void reset()
   {
