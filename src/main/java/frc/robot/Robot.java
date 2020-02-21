@@ -40,6 +40,8 @@ public class Robot extends TimedRobot
   // SUBSYSTEMS
   public static DriveTrain drivetrain = new DriveTrain();
   public static Shooter shooter = new Shooter();
+  public static Pivot pivot = new Pivot();
+  public static Intake intake = new Intake();
 
   // ROBOT MAP
   public RobotMap robotMap = new RobotMap();
@@ -94,6 +96,10 @@ public class Robot extends TimedRobot
     //SmartDashboard.putBoolean("In High Gear?", RobotMap.driveSolenoid.get());
     SmartDashboard.putNumber("Gyro Value", drivetrain.gyro.getAngle());
     SmartDashboard.putNumber("Forward", drivetrain.getHeading());
+
+    SmartDashboard.putData("Pivot", pivot);
+    SmartDashboard.putData("Shooter", shooter);
+    SmartDashboard.putData("Intake", intake);
   }
 
   @Override

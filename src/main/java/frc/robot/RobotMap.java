@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Commands.Drive.*;
+import frc.robot.Commands.Shooter.*;
 import frc.robot.Constants.DriveConstants;
 
 public class RobotMap 
@@ -38,7 +39,7 @@ public class RobotMap
     public static Solenoid driveSolenoid = new Solenoid(0);
 
     // JOYSTICK BUTTONS
-    public static JoystickButton button0, button1;
+    public static JoystickButton button0, button1, button2;
     public static JoystickButton cancelButton;
     
     /**
@@ -49,10 +50,13 @@ public class RobotMap
         // Assign buttons to commandss
         button0 = new JoystickButton(driverJoystick, 2);
         button1 = new JoystickButton(driverJoystick, 3);
+        button2 = new JoystickButton(driverJoystick, 1);
         cancelButton = new JoystickButton(driverJoystick, 4);
 
         // Align to target on button press
         button1.whenPressed(new AlignToCamTarget());
+        button2.whenPressed(new SetIntake(true, true));
+        button2.whenReleased(new SetIntake(false, false));
     }
     
     public Command getAutonomousCommand() {

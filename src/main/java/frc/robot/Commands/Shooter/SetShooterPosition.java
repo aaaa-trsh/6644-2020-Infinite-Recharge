@@ -16,12 +16,12 @@ public class SetShooterPosition extends InstantCommand {
   public SetShooterPosition(double position) 
   {
     addRequirements(Robot.shooter);
-    Robot.shooter.SetShooterPositionState(position);
+    Robot.pivot.SetShooterPositionState(position);
   }
 
   public SetShooterPosition(ShooterPosition position) 
   {
     addRequirements(Robot.shooter);
-    Robot.shooter.SetShooterPositionState(position);
+    Robot.pivot.SetShooterPositionState(position);
   }
 }

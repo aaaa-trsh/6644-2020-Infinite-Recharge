@@ -22,6 +22,8 @@ public final class Constants
         public static final int[] flywheelEncoderR = new int[]{10, 11};
 
         public static final int pivotDistancePerPulse = 4096;
+        public static final int flywheelDistancePerPulse = 4096;
+
         
         // PID Values
         public static final double pivotP = 1;
@@ -29,6 +31,11 @@ public final class Constants
         public static final double pivotD = 0;
         public static final double pivotTurnTolerance = 3;
         public static final double pivotTurnRateToleranceDegPerS = 3;
+        
+        public static final double flywheelP = 1;
+        public static final double flywheelI = 0;
+        public static final double flywheelD = 0;
+        public static final double flywheelTolerance = 0.12;
 
         // Misc
         public static final double minFlywheelSpeed = 11000;
@@ -52,6 +59,8 @@ public final class Constants
         static final double encoderConversion = Math.PI * 6 / 360 / 12;// 0.00436332312
         public static final double encoderDistancePerPulse = 0.00436332312;
         public static boolean gyroReversed = false;
+
+        public static final int driveSolenoidPort = 0;
         
         // PID Values
         public static double stabilizationP = 1;
@@ -81,11 +90,12 @@ public final class Constants
         public static final double ramseteZeta = .7;//0.7
 
         public static final double pDriveVel = 2.5;
+        
     }
 
-    public static final class PneumaticsConstants
+    public static final class IntakeConstants
     {
-        public static final int driveSolenoidPort = 0;
         public static final int intakeSolenoidPort = 1;
+        public static final int intakeConveyorPort = 1;
     }
 }

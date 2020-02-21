@@ -7,41 +7,31 @@
 
 package frc.robot.Commands.Shooter;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class MoveFeedTimed extends CommandBase {
-
-  public Timer timeoutTimer;
-  public double feedrate, duration;
-  public MoveFeedTimed(double speed, double time) {
+public class SetFlywheelSpeed extends CommandBase {
+  public double _speed;
+  public SetFlywheelSpeed(double speed) {
     addRequirements(Robot.shooter);
-    feedrate = speed;
-    duration = time;
+    _speed=speed;
   }
 
   @Override
-  public void initialize() 
-  {
-    timeoutTimer.start();
+  public void initialize() {
+    Robot.shooter.setFlywheelSpeed(_speed);
   }
 
   @Override
-  public void execute() 
-  {
-    Robot.shooter.setFeedSpeed(feedrate);
+  public void execute() {
   }
 
   @Override
-  public void end(boolean interrupted) 
-  {
-    timeoutTimer.stop();
+  public void end(boolean interrupted) {
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timeoutTimer.get() > duration || !Robot.shooter.isShooting;
+    return Robot.shooter.getController().getSetpoint() == _speed;
   }
 }

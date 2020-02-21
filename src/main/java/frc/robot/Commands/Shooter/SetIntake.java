@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
 public class SetIntake extends InstantCommand {
-  public boolean intakeOn;
-  public SetIntake(boolean on) {
+  public boolean intakeOn, useConveyor;
+  public SetIntake(boolean on, boolean conveyor) {
     addRequirements(Robot.shooter);
     intakeOn = on;
   }
@@ -20,6 +20,13 @@ public class SetIntake extends InstantCommand {
   @Override
   public void initialize() 
   {
-    Robot.shooter.SetIntake(intakeOn);
+    if(intakeOn)
+    {
+      Robot.intake.EnableIntake(useConveyor);
+    }
+    else
+    {
+      Robot.intake.DisableIntake();
+    }
   }
 }
