@@ -25,10 +25,10 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Commands.Autonomous;
 import frc.robot.Commands.Drive.*;
+import frc.robot.Commands.Shooter.FlywheelPID;
+import frc.robot.Commands.Shooter.PivotPID;
 import frc.robot.Subsystems.*;
 import frc.robot.Subsystems.Monitor;
 
@@ -41,6 +41,7 @@ public class Robot extends TimedRobot
   public static DriveTrain drivetrain = new DriveTrain();
   public static Shooter shooter = new Shooter();
   public static Intake intake = new Intake();
+  double pivotP, pivotI, pivotSetpoint, flywheelP, flywheelI, flywheelSetpoint;
 
   // ROBOT MAP
   public RobotMap robotMap = new RobotMap();
@@ -87,14 +88,29 @@ public class Robot extends TimedRobot
     SmartDashboard.putData("DriveTrain", drivetrain);
     SmartDashboard.putData("Shooter", shooter.getController());
     SmartDashboard.putData("Intake", intake);
-    SmartDashboard.putData("Tempiture 1", Monitor.Temp0);
-    SmartDashboard.putData("Tempiture 2", Monitor.Temp1);
-    SmartDashboard.putData("Tempiture 3", Monitor.Temp2);
-    SmartDashboard.putData("Tempiture 4", Monitor.Temp3);
+    SmartDashboard.putData("Temperature 1", Monitor.Temp0);
+    SmartDashboard.putData("Temperature 2", Monitor.Temp1);
+    SmartDashboard.putData("Temperature 3", Monitor.Temp2);
+    SmartDashboard.putData("Temperature 4", Monitor.Temp3);
 
     // Shooter
-    SmartDashboard.putData("Left Flywheel Rotations", shooter.flywheelLEncoder);
-    SmartDashboard.putData("Right Flywheel Rotations", shooter.flywheelREncoder);
+    SmartDashboard.putNumber("Left Flywheel Rotations", shooter.flywheelLEncoder.getDistance());
+    SmartDashboard.putNumber("Right Flywheel Rotations", shooter.flywheelREncoder.getDistance());
+    SmartDashboard.putNumber("Pivot Angle", shooter.pivotEncoder.getDistance());
+
+    SmartDashboard.putNumber("Feed Ultrasonic", drivetrain.getHeading());
+    
+    pivotP = SmartDashboard.getNumber("Pivot P", 0);
+    pivotI = SmartDashboard.getNumber("Pivot I", 0); 
+    pivotSetpoint = SmartDashboard.getNumber("Pivot Setpoint Angle", 0);
+    
+    SmartDashboard.putData(new PivotPID(pivotP, pivotI, pivotSetpoint));
+
+    flywheelP = SmartDashboard.getNumber("Flywheel P", 0);
+    flywheelI = SmartDashboard.getNumber("Flywheel I", 0);
+    flywheelSetpoint = SmartDashboard.getNumber("Flywheel Setpoint Angle", 0);
+    
+    SmartDashboard.putData(new FlywheelPID(flywheelP, flywheelI, flywheelSetpoint));
 
     // Limelight
     SmartDashboard.putNumber("LimelightX", x);
