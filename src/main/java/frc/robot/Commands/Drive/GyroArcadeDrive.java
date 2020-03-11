@@ -32,13 +32,6 @@ public class GyroArcadeDrive extends CommandBase {
     double x = -RobotMap.driverJoystick.getY();
     double y = -RobotMap.driverJoystick.getX();
 
-    // Set drive transmission with a solenoid.
-    if (RobotMap.driverJoystick.getRawButton(1) == false) {
-      RobotMap.driveSolenoid.set(false); // Low gear
-    } else {
-      RobotMap.driveSolenoid.set(true); // SPEEEEED
-    }
-
     // try doing gyro teleop
     doGyroTeleop = !RobotMap.driverJoystick.getRawButton(2);
 
@@ -48,7 +41,7 @@ public class GyroArcadeDrive extends CommandBase {
           Robot.drivetrain.forwardRotation = Robot.drivetrain.gyro.getAngle();
           DriveTrain.differentialDrive.arcadeDrive(x, y);
         } else {
-          double turningValue = (Robot.drivetrain.forwardRotation - Robot.drivetrain.gyro.getAngle()) * 0.07;
+          double turningValue = (Robot.drivetrain.forwardRotation - Robot.drivetrain.gyro.getAngle()) * 0.2;
           DriveTrain.differentialDrive.arcadeDrive(x, -turningValue);
         }
       } else {

@@ -18,16 +18,22 @@ public class Shooter extends PIDSubsystem {
   
   public Encoder flywheelLEncoder = new Encoder(ShooterConstants.flywheelEncoderL[0], ShooterConstants.flywheelEncoderL[1]);
   public Encoder flywheelREncoder = new Encoder(ShooterConstants.flywheelEncoderR[0], ShooterConstants.flywheelEncoderR[1]);
+  public Encoder pivotEncoder = new Encoder(ShooterConstants.pivotEncoderPorts[0], ShooterConstants.pivotEncoderPorts[1]);
+
+  public Ultrasonic feedUltrasonic = new Ultrasonic(6, 7);
   
   public Spark flywheelL = new Spark(ShooterConstants.flywheelPortL);
   public Spark flywheelR = new Spark(ShooterConstants.flywheelPortR);
-  public Spark feedL = new Spark(ShooterConstants.flywheelPortL);
-  public Spark feedR = new Spark(ShooterConstants.flywheelPortR);
+  public Spark pivot = new Spark(ShooterConstants.pivotPort);
+  public Spark feedL = new Spark(ShooterConstants.feedPortL);
+  public Spark feedR = new Spark(ShooterConstants.feedPortR);
 
   public boolean hasBallLoaded;
   public boolean isShooting;
 
-  public Ultrasonic magazineUltrasonic = new Ultrasonic(ShooterConstants.magazineUltrasonicPorts[0], ShooterConstants.magazineUltrasonicPorts[1]);
+
+  public boolean doingPivotPID = false;
+  public boolean doingFlywheelPID = false;
 
 
   public Shooter() {
@@ -35,12 +41,12 @@ public class Shooter extends PIDSubsystem {
     getController().setTolerance(ShooterConstants.flywheelTolerance);
     flywheelLEncoder.setDistancePerPulse(ShooterConstants.flywheelDistancePerPulse);   
     flywheelREncoder.setDistancePerPulse(ShooterConstants.flywheelDistancePerPulse);   
+
   }
 
   public void StartMagazineUltrasonic()
-  {
-    magazineUltrasonic.setEnabled(true);
-    magazineUltrasonic.setAutomaticMode(true);
+  {    feedUltrasonic.setEnabled(true);
+    feedUltrasonic.setAutomaticMode(true);
   }
 
   public void setFlywheelSpeed(double speed)
@@ -48,16 +54,27 @@ public class Shooter extends PIDSubsystem {
     getController().setSetpoint(speed);
   }
 
-  public void setFeedSpeed(double speed)
+  public void setFlywheelVoltage(double speed)
   {
-    feedL.set(speed);
-    feedR.set(speed);
+    flywheelL.setVoltage(speed);
+    flywheelR.setVoltage(speed);
+  }
+
+  public void setFeedVoltage(double speed)
+  {
+    feedL.setVoltage(speed * 12);
+    feedR.setVoltage(speed * 12);
+  }
+
+  public void setPivotVoltage(double speed)
+  {
+    pivot.set(speed);
   }
 
   @Override
   public void useOutput(double output, double setpoint) {
-    flywheelL.set(output);
-    flywheelR.set(-output);
+    //flywheelL.set(output);
+    //flywheelR.set(output);
   }
 
   @Override

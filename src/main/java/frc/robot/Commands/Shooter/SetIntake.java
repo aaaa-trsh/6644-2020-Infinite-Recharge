@@ -15,6 +15,7 @@ public class SetIntake extends InstantCommand {
   public SetIntake(boolean on, boolean conveyor) {
     addRequirements(Robot.shooter);
     intakeOn = on;
+    useConveyor = conveyor;
   }
 
   @Override

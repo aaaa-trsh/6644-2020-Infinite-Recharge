@@ -13,16 +13,17 @@ public final class Constants
         public static final int feedPortL = 6;
         public static final int feedPortR = 7;        
 
-        public static final int pivotPort = 8;
+        public static final int pivotPort = 10;
         
-        public static final int[] magazineUltrasonicPorts = new int[]{4, 5};
+        public static final int[] pivotEncoderPorts = new int[]{4, 5};
 
-        public static final int[] pivotEncoderPorts = new int[]{6, 7};
-        public static final int[] flywheelEncoderL = new int[]{8, 9};
-        public static final int[] flywheelEncoderR = new int[]{10, 11};
+        public static final int[] flywheelEncoderL = new int[]{0, 1};
+        public static final int[] flywheelEncoderR = new int[]{2, 3};
+        public static final int[] feedUltrasonic = new int[]{6, 7};
 
-        public static final int pivotDistancePerPulse = 4096;
-        public static final int flywheelDistancePerPulse = 4096;
+        
+        public static final int pivotDistancePerPulse = 4096/4096;
+        public static final double flywheelDistancePerPulse = 0.000244140625*2;
 
         
         // PID Values
@@ -49,8 +50,8 @@ public final class Constants
         public static final int rightMotor1Port = 2;
         public static final int rightMotor2Port = 3;
     
-        public static final int[] leftEncoderPorts = new int[]{0, 1};
-        public static final int[] rightEncoderPorts = new int[]{2, 3};
+        public static final int[] leftEncoderPorts = new int[]{13, 14};
+        public static final int[] rightEncoderPorts = new int[]{15, 16};
         public static final boolean leftEncoderReversed = false;
         public static final boolean rightEncoderReversed = true;
     
@@ -95,7 +96,7 @@ public final class Constants
 
     public static final class IntakeConstants
     {
-        public static final int intakeSolenoidPort = 1;
-        public static final int intakeConveyorPort = 1;
+        public static final int intakeSolenoidPort = 6;
+        public static final int intakeConveyorPort = 9;
     }
 }

@@ -5,21 +5,34 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.Commands.Shooter;
+package frc.robot.Commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.Constants.ShooterConstants;
 
-public class WaitUntilFlywheelSpeed extends CommandBase {
+public class Wait extends CommandBase {
 
-  public WaitUntilFlywheelSpeed() 
-  {
-    addRequirements(Robot.shooter);
+  Timer timer;
+  double timeToWait;
+  public Wait(double time) {
+    timeToWait = time;
+  }
+
+  @Override
+  public void initialize() {
+    timer.start();
+  }
+
+  @Override
+  public void execute() {
+  }
+
+  @Override
+  public void end(boolean interrupted) {
   }
 
   @Override
   public boolean isFinished() {
-    return !Robot.shooter.isShooting || (Robot.shooter.flywheelLEncoder.getRate() > ShooterConstants.minFlywheelSpeed && Robot.shooter.flywheelREncoder.getRate() > ShooterConstants.minFlywheelSpeed);
+    return timer.get() > timeToWait;
   }
 }

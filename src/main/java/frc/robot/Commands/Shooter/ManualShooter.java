@@ -7,31 +7,19 @@
 
 package frc.robot.Commands.Shooter;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
-public class SetFlywheelSpeed extends CommandBase {
-  public double _speed;
-  public SetFlywheelSpeed(double speed) {
+public class ManualShooter extends InstantCommand {
+  double _speed;
+  public ManualShooter(double speed) {
     addRequirements(Robot.shooter);
-    _speed=speed;
-  }
-
-  @Override
-  public void initialize() {
-    Robot.shooter.setFlywheelSpeed(_speed);
+    _speed = speed;
   }
 
   @Override
   public void execute() {
-  }
+    Robot.shooter.setFlywheelVoltage(_speed);
 
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  @Override
-  public boolean isFinished() {
-    return Robot.shooter.getController().getSetpoint() == _speed;
   }
 }

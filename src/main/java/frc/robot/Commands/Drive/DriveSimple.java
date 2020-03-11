@@ -3,7 +3,6 @@ package frc.robot.Commands.Drive;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 public class DriveSimple extends CommandBase
 {
@@ -65,7 +64,6 @@ public class DriveSimple extends CommandBase
     // Calculate rotation error and drive the robot accordingly
     double turningValue = (targetAngle - gyro.getAngle()) * proportionalTurningConst;
     Robot.drivetrain.arcadeDrive(targetDistance > 2 ? driveSpeed : slow, -turningValue);
-    RobotMap.driveSolenoid.set(false);
   }
 
   @Override

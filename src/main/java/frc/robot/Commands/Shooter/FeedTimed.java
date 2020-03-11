@@ -11,37 +11,34 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class MoveFeedTimed extends CommandBase {
+public class FeedTimed extends CommandBase {
 
-  public Timer timeoutTimer = new Timer();
-  public double feedrate, duration;
-  public MoveFeedTimed(double speed, double time) {
-    addRequirements(Robot.shooter);
-    feedrate = speed;
-    duration = time;
+  Timer timer;
+  double timeToWait, feedSpeed;
+  public FeedTimed(double time, double feed) {
+    timeToWait = time;
+    feedSpeed = feed;
   }
 
   @Override
-  public void initialize() 
-  {
-    timeoutTimer.start();
+  public void initialize() {
+    timer.start();
   }
 
   @Override
   public void execute() 
   {
-    Robot.shooter.setFeedVoltage(feedrate);
+    Robot.shooter.setFeedVoltage(feedSpeed);
   }
 
   @Override
   public void end(boolean interrupted) 
   {
-    timeoutTimer.stop();
+    Robot.shooter.setFeedVoltage(0);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timeoutTimer.get() > duration || !Robot.shooter.isShooting;
+    return timer.get() > timeToWait;
   }
 }

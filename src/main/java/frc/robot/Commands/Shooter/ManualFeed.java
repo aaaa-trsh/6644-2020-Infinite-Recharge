@@ -7,21 +7,18 @@
 
 package frc.robot.Commands.Shooter;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.Subsystems.ShooterPosition;
 
-public class SetShooterPosition extends InstantCommand {
-
-  public SetShooterPosition(double position) 
-  {
+public class ManualFeed extends CommandBase {
+  double _speed;
+  public ManualFeed(double speed) {
     addRequirements(Robot.shooter);
-    Robot.pivot.SetShooterPositionState(position);
+    _speed = speed;
   }
 
-  public SetShooterPosition(ShooterPosition position) 
-  {
-    addRequirements(Robot.shooter);
-    Robot.pivot.SetShooterPositionState(position);
+  @Override
+  public void execute() {
+    Robot.shooter.setFeedVoltage(_speed);
   }
 }

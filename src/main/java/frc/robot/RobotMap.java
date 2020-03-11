@@ -11,7 +11,6 @@ import java.util.List;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
@@ -33,13 +32,15 @@ public class RobotMap
 {
 	// JOYSTICKS
     public static Joystick driverJoystick = new Joystick(0);
+    //public static Joystick operatorJoystick = new Joystick(1);
+
 
     // PNEUMATICS
     public static Compressor compressor = new Compressor();
-    public static Solenoid driveSolenoid = new Solenoid(0);
+    //public static Solenoid driveSolenoid = new Solenoid(0);
 
     // JOYSTICK BUTTONS
-    public static JoystickButton button0, button1, button2;
+    public static JoystickButton button0, button1, button2, button5, feedInButton, feedOutButton, flywheelInButton, flywheelOutButton;
     public static JoystickButton cancelButton;
     
     /**
@@ -49,14 +50,40 @@ public class RobotMap
     {
         // Assign buttons to commandss
         button0 = new JoystickButton(driverJoystick, 2);
+        button0.whenPressed(new DriveTransmission(true));
+        button0.whenReleased(new DriveTransmission(false));
+
         button1 = new JoystickButton(driverJoystick, 3);
         button2 = new JoystickButton(driverJoystick, 1);
         cancelButton = new JoystickButton(driverJoystick, 4);
+        button5 = new JoystickButton(driverJoystick, 5);
+
+        button5 = new JoystickButton(driverJoystick, 5);
+
+        feedInButton = new JoystickButton(driverJoystick, 7);
+        feedInButton.whenPressed(new ManualFeed(0.6f));
+        feedInButton.whenReleased(new ManualFeed(0f));
+
+        feedOutButton = new JoystickButton(driverJoystick, 8);
+        feedOutButton.whenPressed(new ManualFeed(-0.6f));
+        feedOutButton.whenReleased(new ManualFeed(0f));
+
+        flywheelInButton = new JoystickButton(driverJoystick, 9);
+        flywheelInButton.whenPressed(new ManualShooter(-6f));
+        flywheelInButton.whenReleased(new ManualShooter(0f));
+
+        flywheelOutButton = new JoystickButton(driverJoystick, 10);
+        flywheelOutButton.whenPressed(new ManualShooter(12f));
+        flywheelOutButton.whenReleased(new ManualShooter(0f));
 
         // Align to target on button press
-        button1.whenPressed(new AlignToCamTarget());
+        //button1.whenPressed(new AlignToCamTarget());
         button2.whenPressed(new SetIntake(true, true));
         button2.whenReleased(new SetIntake(false, false));
+        button2.whenPressed(new ManualShooter(-1f));
+        button2.whenReleased(new ManualShooter(0f));
+        //button0.whenPressed(new MoveFeedTimed(-0.2, 0.3));
+        //button5.whenPressed(new SetFlywheelSpeed(100, true));
     }
     
     public Command getAutonomousCommand() {

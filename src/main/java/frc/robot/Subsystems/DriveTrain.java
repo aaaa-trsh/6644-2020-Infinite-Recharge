@@ -1,6 +1,7 @@
 package frc.robot.Subsystems;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -9,6 +10,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Constants;
@@ -33,11 +35,18 @@ public class DriveTrain extends SubsystemBase
 
   public static boolean canUseJoystick = true;
   public double forwardRotation;
+
+  Compressor compressor = new Compressor();
+  public static Solenoid transmissionSolenoid = new Solenoid(Constants.DriveConstants.driveSolenoidPort);
+  boolean transmission = false;
+
   public DriveTrain()
   {    
+    compressor.start();
     leftEncoder.setDistancePerPulse(Constants.DriveConstants.encoderDistancePerPulse);
     rightEncoder.setDistancePerPulse(Constants.DriveConstants.encoderDistancePerPulse);
   }
+
   public void start()
   {
     reset();
@@ -54,8 +63,6 @@ public class DriveTrain extends SubsystemBase
     
     rightEncoder.reset();
     rightEncoder.setReverseDirection(Constants.DriveConstants.rightEncoderReversed);
-
-    // Initialize Ultrasonic
   }
   public void reset()
   {
@@ -64,7 +71,11 @@ public class DriveTrain extends SubsystemBase
     rightEncoder.reset();
 
     leftEncoder.reset();
+  }
 
+  public void setTransmission(boolean on)
+  {
+    transmission = on;
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed)
@@ -86,6 +97,8 @@ public class DriveTrain extends SubsystemBase
     // Update the odometry in the periodic block
     odometry.update(Rotation2d.fromDegrees(getHeading()), leftEncoder.getDistance(),
                       rightEncoder.getDistance());
+
+    transmissionSolenoid.set(transmission);
   }
 
    /**

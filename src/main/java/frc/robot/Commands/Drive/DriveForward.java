@@ -3,7 +3,6 @@ package frc.robot.Commands.Drive;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 public class DriveForward extends CommandBase
 {
@@ -39,8 +38,6 @@ public class DriveForward extends CommandBase
   @Override
   public void execute() 
   {
-    RobotMap.driveSolenoid.set(false); // Low gear
-
     // Get the current distance the robot has moved so far
     currentDistance = ((Robot.drivetrain.leftEncoder.getDistance() + Robot.drivetrain.rightEncoder.getDistance() / 2));
     

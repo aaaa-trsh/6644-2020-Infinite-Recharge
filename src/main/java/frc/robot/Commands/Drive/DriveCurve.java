@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 import frc.robot.Classes.BezierCurve;
 
 public class DriveCurve extends CommandBase 
@@ -64,8 +63,8 @@ public class DriveCurve extends CommandBase
     gyro = Robot.drivetrain.gyro;
     //gyro.reset();
     targetDistance = curve.getLength(100);
-    Robot.drivetrain.leftEncoder.reset();
-    Robot.drivetrain.rightEncoder.reset();
+    //Robot.drivetrain.leftEncoder.reset();
+    //Robot.drivetrain.rightEncoder.reset();
   }
 
   double currentDistance;
@@ -102,7 +101,6 @@ public class DriveCurve extends CommandBase
 
     System.out.println("T:" + t + "CURVE ANGLE: " + curve.getAngle(t) + ", GYRO:" + gyro.getAngle());
     Robot.drivetrain.arcadeDrive(inverted ? -rawSpeed : rawSpeed, -(curve.getAngle(t/curve.getLength(100)) - gyro.getAngle()) * 0.05);
-    RobotMap.driveSolenoid.set(false);
   }
 
   @Override

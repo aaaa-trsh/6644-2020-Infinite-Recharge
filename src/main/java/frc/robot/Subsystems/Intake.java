@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
+import frc.robot.Commands.Shooter.FlywheelPID;
+import frc.robot.Commands.Shooter.ManualShooter;
 import frc.robot.Constants.*;
 
 public class Intake extends SubsystemBase 
@@ -36,6 +38,7 @@ public class Intake extends SubsystemBase
   {
     intakeDown = false;
     intakeSolenoid.set(false);
+    useConveyor = false;
   }
 
   public boolean getIntakeState()
@@ -54,12 +57,12 @@ public class Intake extends SubsystemBase
   {
     if(useConveyor)
     {
-      intakeConveyor.set(0.2);
-      Robot.shooter.setFlywheelSpeed(-0.4);
+      intakeConveyor.set(-0.4);
+      Robot.shooter.setFlywheelVoltage(-12);
     }
     else
     {
-      Robot.shooter.setFlywheelSpeed(0);
+      intakeConveyor.set(0);
     }
   }
 }
