@@ -10,8 +10,8 @@
 /* It's kind of a base west coast drive project that has commands and         */
 /* encoders (and now vision!) and all that fun stuff.                         */
 /*                                                                            */
-/* The intended purpose of this is to be a test project for 6644 to test out  */
-/* systems on different robots.                                               */
+/* The intended purpose of this is to be a complete project for 6644 to test  */
+/* out systems on different robots.                                           */
 /*                                                                            */
 /* I'm probably going to duplicate this for the actual code if its actually   */
 /* useful.                                                                    */
