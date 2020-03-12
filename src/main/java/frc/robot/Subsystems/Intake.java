@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
-import frc.robot.Commands.Shooter.FlywheelPID;
-import frc.robot.Commands.Shooter.ManualShooter;
 import frc.robot.Constants.*;
 
 public class Intake extends SubsystemBase 
