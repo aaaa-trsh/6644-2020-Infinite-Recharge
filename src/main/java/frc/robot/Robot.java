@@ -5,7 +5,7 @@
 /*  ██╔═══██╗██╔═══██╗╚════██║╚════██║                                        */
 /*  ╚██████╔╝╚██████╔╝     ██║     ██║                                        */
 /*   ╚═════╝  ╚═════╝      ╚═╝     ╚═╝                                        */
-/* 6644 ATOMIC AUTOMATONS FRC CODE - WRITTEN BY KEITH BARTLETT                */
+/* 6644 ATOMIC AUTOMATONS FRC CODE - WRITTEN BY KEITH BARTLETT AND SOME GIRL  */
 /* This is some FRC code.                                                     */
 /* It's kind of a base west coast drive project that has commands and         */
 /* encoders (and now vision!) and all that fun stuff.                         */
@@ -14,7 +14,7 @@
 /* systems on different robots.                                               */
 /*                                                                            */
 /* I'm probably going to duplicate this for the actual code if its actually   */
-/* useful.                                                                    */
+/* useful.  æugh                                                              */
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Commands.Autonomous;
 import frc.robot.Commands.Drive.*;
 import frc.robot.Subsystems.*;
+import frc.robot.Subsystems.Monitor;
 
 public class Robot extends TimedRobot 
 {
@@ -86,6 +87,10 @@ public class Robot extends TimedRobot
     SmartDashboard.putData("DriveTrain", drivetrain);
     SmartDashboard.putData("Shooter", shooter.getController());
     SmartDashboard.putData("Intake", intake);
+    SmartDashboard.putData("Tempiture 1", Monitor.Temp0);
+    SmartDashboard.putData("Tempiture 2", Monitor.Temp1);
+    SmartDashboard.putData("Tempiture 3", Monitor.Temp2);
+    SmartDashboard.putData("Tempiture 4", Monitor.Temp3);
 
     // Shooter
     SmartDashboard.putData("Left Flywheel Rotations", shooter.flywheelLEncoder);

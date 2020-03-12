@@ -57,6 +57,7 @@ public class Intake extends SubsystemBase
   {
     if(useConveyor)
     {
+      // limiting voltage is a cheap way to limit current
       intakeConveyor.set(-0.4);
       Robot.shooter.setFlywheelVoltage(-12);
     }
