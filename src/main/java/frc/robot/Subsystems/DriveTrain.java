@@ -18,24 +18,24 @@ import frc.robot.Robot;
 
 public class DriveTrain extends SubsystemBase
 {
-  // DRIVE
+  // Gearbox Drive train
   public static Spark leftMotor1 = new Spark(Constants.DriveConstants.leftMotor1Port);
   public static Spark rightMotor1 = new Spark(Constants.DriveConstants.rightMotor1Port);
 
   private static Spark leftMotor2 = new Spark(Constants.DriveConstants.leftMotor2Port);
   private static Spark rightMotor2 = new Spark(Constants.DriveConstants.rightMotor2Port);
   public static DifferentialDrive differentialDrive = new DifferentialDrive(new SpeedControllerGroup(leftMotor1, leftMotor2), new SpeedControllerGroup(rightMotor1, rightMotor2));
-  
+  // Configure encoders
   public Encoder leftEncoder = new Encoder(Constants.DriveConstants.leftEncoderPorts[0],
       Constants.DriveConstants.leftEncoderPorts[1]);
   public Encoder rightEncoder = new Encoder(Constants.DriveConstants.rightEncoderPorts[0], Constants.DriveConstants.rightEncoderPorts[1]);
   private DifferentialDriveOdometry odometry;
-
+  //spin up gyro [NEEDS CALIBRATION]
   public ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 
   public static boolean canUseJoystick = true;
   public double forwardRotation;
-
+  // Initalize compressor
   Compressor compressor = new Compressor();
   public static Solenoid transmissionSolenoid = new Solenoid(Constants.DriveConstants.driveSolenoidPort);
   boolean transmission = false;
