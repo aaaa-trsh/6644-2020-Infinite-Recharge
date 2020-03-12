@@ -19,23 +19,25 @@ public class Monitor{
 
     public double getTemp0()
     {
-        Temp0.setAverageBits(4);
-        return Temp0.getVoltage();
+       // (°C × 9/5) + 32 = °F
+       //Temp in °C = [(Vout in mV) - 500] / 10
+       // Temp0.setAverageBits(4);
+        return ((((Temp0.getVoltage() - 500) / 10) * (9/5))) + 32;
     }
     public double getTemp1()
     {
-        Temp1.setAverageBits(4);
-        return Temp1.getVoltage();
+       // Temp1.setAverageBits(4);
+        return ((((Temp1.getVoltage() - 500) / 10) * (9/5))) + 32;
     }
     public double getTemp2()
     {
-        Temp2.setAverageBits(4);
-        return Temp2.getVoltage();
+        // Temp2.setAverageBits(4);
+        return ((((Temp2.getVoltage() - 500) / 10) * (9/5))) + 32;
     }
     public double getTemp3()
     {
-        Temp3.setAverageBits(4);
-        return Temp3.getVoltage();
+        // Temp3.setAverageBits(4);
+        return ((((Temp3.getVoltage() - 500) / 10) * (9/5))) + 32;
     }
 }
 
