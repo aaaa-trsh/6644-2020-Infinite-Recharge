@@ -9,8 +9,10 @@ package frc.robot.Subsystems;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 public class Monitor{
+    //  æugh 
     /// shit fuck oh god
     /// shit fuck monitor temps
+    // we have some sort of analoug processor in the office, saw it a year ago, maybe take a look into that? -lulu
     public static AnalogInput Temp0 = new AnalogInput(0);
     public static AnalogInput Temp1 = new AnalogInput(1);
     public static AnalogInput Temp2 = new AnalogInput(2);
@@ -41,4 +43,6 @@ public class Monitor{
     }
 }
 
-/// takes values from analoug that are hooked to thermocouplers and sends them to shuffleboard - snups
+/// takes values from analoug that are hooked to thermosensors and sends them to shuffleboard - snups
+// https://cdn-learn.adafruit.com/downloads/pdf/tmp36-temperature-sensor.pdf?timestamp=1583972648
+// https://www.analog.com/media/en/technical-documentation/data-sheets/TMP35_36_37.pdf    --- TM36
