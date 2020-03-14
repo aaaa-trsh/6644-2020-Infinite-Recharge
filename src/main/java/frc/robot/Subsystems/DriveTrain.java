@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Spark;
+//import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -19,11 +20,12 @@ import frc.robot.Robot;
 public class DriveTrain extends SubsystemBase
 {
   // Gearbox Drive train
-  public static Spark leftMotor1 = new Spark(Constants.DriveConstants.leftMotor1Port);
-  public static Spark rightMotor1 = new Spark(Constants.DriveConstants.rightMotor1Port);
+  
+  public static Talon leftMotor1 = new Talon(0);
+  public static Talon rightMotor1 = new Talon(1);
 
-  private static Spark leftMotor2 = new Spark(Constants.DriveConstants.leftMotor2Port);
-  private static Spark rightMotor2 = new Spark(Constants.DriveConstants.rightMotor2Port);
+  private static Talon leftMotor2 = new Talon(2);
+  private static Talon rightMotor2 = new Talon(3);
   public static DifferentialDrive differentialDrive = new DifferentialDrive(new SpeedControllerGroup(leftMotor1, leftMotor2), new SpeedControllerGroup(rightMotor1, rightMotor2));
   // Configure encoders
   public Encoder leftEncoder = new Encoder(Constants.DriveConstants.leftEncoderPorts[0],
